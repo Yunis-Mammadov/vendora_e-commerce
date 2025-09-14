@@ -1,0 +1,21 @@
+@import "./layout.scss";
+@import "./home.scss";
+@import "./navbar.scss";
+
+
+body{
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+ul{
+  padding: 0;
+}
+
+li, a{
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
