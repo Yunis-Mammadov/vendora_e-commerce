@@ -1,13 +1,23 @@
-import "@/styles/globals.scss"
-import Navbar from "./Navbar/Navbar";
+"use client";
+
+import "@/styles/globals.scss";
+import Navbar from "./components/Navbar/Navbar";
+
+import { ReactLenis } from "@/app/utils/lenis"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+
+
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-      </body>
+      <ReactLenis root>
+        <body>
+          <Navbar />
+          <main className="snap-root">
+            {children}
+          </main>
+        </body>
+      </ReactLenis>
     </html>
-  )
+  );
 }
