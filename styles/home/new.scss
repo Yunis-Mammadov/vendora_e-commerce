@@ -11,6 +11,7 @@
     }
 
     .marquee-item {
+        font-family: var(--font-clash), sans-serif;
         font-weight: bold;
         font-size: 2rem;
         text-transform: uppercase;
@@ -77,20 +78,22 @@
                 h2 {
                     margin: 0;
                     color: #333;
+                    font-family: var(--font-clash), sans-serif;
                 }
-
+                
                 p {
                     margin: 0.3rem 0 0;
                     color: #777;
+                    font-family: var(--font-clash), sans-serif;
                 }
             }
-
+            
             .add-to-cart {
                 position: absolute;
                 bottom: -30px;
                 left: 50%;
                 transform: translateX(-50%);
-                padding: 0.6rem 1.2rem; 
+                padding: 0rem 1.2rem;
                 color: black;
                 border: none;
                 cursor: pointer;
@@ -99,7 +102,7 @@
                 display: flex;
                 justify-content: space-evenly;
                 width: 70%;
-
+                
                 button,
                 p {
                     margin: 0;
@@ -107,14 +110,16 @@
                     font-weight: 500;
                     background-color: transparent;
                     border: none;
+                    font-size: 1.1rem;
+                    
 
                     &:hover {
                         cursor: pointer;
                     }
                 }
-
+                
                 button {
-                    font-size: 1rem;
+                    font-family: var(--font-clash), sans-serif;
                 }
 
             }
@@ -169,7 +174,7 @@
                     display: flex;
                     align-items: center;
 
-                    button{
+                    button {
                         font-size: 1.1rem;
                     }
                 }

@@ -1,7 +1,7 @@
 .toolbar {
   background-color: black;
   color: white;
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-align: center;
 
   .marquee {
@@ -77,8 +77,8 @@
   }
 
   .logo {
-    font-family: 'Times New Roman', serif;
-    font-size: 1.2rem;
+    font-family: var(--font-clash), sans-serif;
+    font-size: 1.7rem;
     font-weight: bold;
     text-align: center;
 
@@ -203,11 +203,12 @@
       padding: 0;
       border-bottom: 1px solid white;
       overflow: hidden;
-
+      
       a {
         display: block;
         width: 100%;
-        font-size: 2.5rem;
+        font-family: var(--font-clash), sans-serif;
+        font-size: 4rem;
         letter-spacing: -2px;
         line-height: 3.5rem;
         color: white;

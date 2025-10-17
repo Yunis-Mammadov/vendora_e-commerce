@@ -7,31 +7,28 @@
     margin-top: 5rem;
 
     .about-title {
-        // background-color: green;
 
         h1 {
-            // background-color: blue;
             margin: 0;
+            font-family: var(--font-clash), sans-serif;
             font-weight: 500;
-            // word-break: 2rem;
             font-size: 5rem;
             text-align: center;
         }
     }
-
+    
     .about-desc {
-        // background-color: yellow;
         text-align: center;
         display: flex;
         flex-direction: column;
         width: 55%;
-        // margin: 0 auto;
-
+        
         p {
             font-size: 1.4rem;
         }
-
+        
         button {
+            font-family: var(--font-clash), sans-serif;
             padding: 0.8rem 4.5rem;
             margin: 1rem auto;
             background-color: transparent;

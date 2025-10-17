@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "./Navbar.module.scss";
+import { useEffect, useState } from "react";
 import Hamburger from "../Hamburger/Hamburger";
+import styles from "./Navbar.module.scss";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,17 +11,13 @@ export default function Navbar() {
     const [isMobile, setIsMobile] = useState(false);
     const [isLoginModal, setIsLoginModal] = useState(false);
     const [isSearchModal, setIsSearchModal] = useState(false);
+    const [resetHamburger, setResetHamburger] = useState(false);
+    const [gender, setGender] = useState<"man" | "woman" | undefined>(undefined);
 
-    const toggleMenu = () => setIsOpen(!isOpen);
 
-    // scroll-un bağlanması üçün effekt
+    // scroll bağlama
     useEffect(() => {
-        if (isOverlayOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-
+        document.body.style.overflow = isOverlayOpen ? "hidden" : "";
         return () => {
             document.body.style.overflow = "";
         };
@@ -35,20 +31,26 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
+    // overlay bağlama funksiyası
+    const handleOverlayClose = () => {
+        setIsOverlayOpen(false);
+        setResetHamburger(true); // hamburger-i bağla
+        setTimeout(() => setResetHamburger(false), 0); // reset flag silinsin
+    };
+
     return (
         <>
-            {!isOverlayOpen && (
+            {/* {!isOverlayOpen && (
                 <div className={styles.toolbar}>
                     <marquee scrollamount="10" direction="left">
-                        🎉 Welcome to Vendora! Big discounts available now — check our stores 🎉
+                        Welcome to Vendora! Big discounts available now — check our stores
                     </marquee>
                 </div>
-            )}
+            )} */}
 
             <nav className={`${styles.navbar} ${isOverlayOpen ? styles.navbarDark : ""}`}>
                 <div style={{ display: "flex" }}>
-                    {/* Hamburger desktop üçün görünmür, mobile üçün sağda əlavə edəcəyik */}
-                    {!isMobile && <Hamburger onToggle={setIsOverlayOpen} />}
+                    {!isMobile && <Hamburger onToggle={setIsOverlayOpen} reset={resetHamburger} />}
 
                     {/* Left menu */}
                     <ul className={`${styles.navLinks} ${isOpen ? styles.active : ""}`}>
@@ -65,12 +67,10 @@ export default function Navbar() {
 
                 {/* Right menu */}
                 <ul className={styles.rightLinks}>
-                    {/* Desktop */}
                     {!isMobile && <li className={styles.childLinks}><Link href="#">LOGIN/REGISTRAZIONE</Link></li>}
                     {!isMobile && <li className={styles.childLinks}><Link href="#">SEARCH</Link></li>}
                     {!isMobile && <li className={styles.bag}><Link href="#">BAG<span>0</span></Link></li>}
 
-                    {/* Mobile: user icon və hamburger */}
                     {isMobile && (
                         <>
                             <li className={styles.userIcon}>
@@ -81,7 +81,7 @@ export default function Navbar() {
                             <p onClick={() => setIsSearchModal(true)}>🔍</p>
                             <li className={styles.bag}><Link href="#">BAG<span>0</span></Link></li>
                             <li className={styles.hamburgerWrapper}>
-                                <Hamburger onToggle={setIsOverlayOpen} />
+                                <Hamburger onToggle={setIsOverlayOpen} reset={resetHamburger} />
                             </li>
                         </>
                     )}
@@ -106,13 +106,14 @@ export default function Navbar() {
                 </>
             )}
 
+            {/* Overlay */}
             <div className={`${styles.overlay} ${isOverlayOpen ? styles.show : ""}`}>
                 <ul>
-                    <li><Link href="/category/woman"><span>WOMAN</span></Link></li>
-                    <li><Link href="/category/man"><span>MAN</span></Link></li>
-                    <li><Link href="/category/womanaccessories"><span>WOMAN ACCESSORIES</span></Link></li>
-                    <li><Link href="/category/manaccessories"><span>MAN ACCESSORIES</span></Link></li>
-                    <li><Link href="/category/brand"><span>BRAND</span></Link></li>
+                    <li><Link href="/category/woman" onClick={handleOverlayClose}><span> WOMAN</span></Link></li>
+                    <li><Link href="/category/man" onClick={handleOverlayClose}><span>MAN</span></Link></li>
+                    <li><Link href="/category/womanaccessories" onClick={handleOverlayClose}><span>WOMAN ACCESSORIES</span></Link></li>
+                    <li><Link href="/category/manaccessories" onClick={handleOverlayClose}><span>MAN ACCESSORIES</span></Link></li>
+                    <li><Link href="/category/brand" onClick={handleOverlayClose}><span>BRAND</span></Link></li>
                 </ul>
             </div>
         </>

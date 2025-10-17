@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './Hamburger.scss'
 
 interface HamburgerProps {
     onToggle?: (state: boolean) => void;
+    reset?: boolean; // əlavə reset prop
 }
 
-export default function Hamburger({ onToggle }: HamburgerProps) {
+export default function Hamburger({ onToggle, reset }: HamburgerProps) {
     const [isActive, setIsActive] = useState(false);
 
     const handleClick = () => {
-        setIsActive(!isActive);
-        if (onToggle) onToggle(!isActive);
+        const newState = !isActive;
+        setIsActive(newState);
+        if (onToggle) onToggle(newState);
     };
+
+    // reset gələndə bağlansın
+    useEffect(() => {
+        if (reset) {
+            setIsActive(false);
+        }
+    }, [reset]);
 
     return (
         <div
@@ -25,6 +34,5 @@ export default function Hamburger({ onToggle }: HamburgerProps) {
                 <div className="hamburger__hidden"></div>
             </div>
         </div>
-
     );
 }
